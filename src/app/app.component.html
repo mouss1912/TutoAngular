@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+                <ul class="list-group">
+                        <app-appareil *ngFor="let appareil of appareils" 
+                        [appareilName]= appareil.name
+                        [appareilStatus]=appareil.status></app-appareil>
+                    <!--NB: "'éteint'" : pour que ça soit bien des string-->
+                    
+<!--                     // cas1 (2) avec le ngFor cas1 (1) avec la liste
+                        <app-appareil [appareilName]="appareilOne" [appareilStatus]="'éteint'"></app-appareil>
+                        <app-appareil [appareilName]="appareilTwo" [appareilStatus]="'allumé'"></app-appareil>
+                        <app-appareil [appareilName]="appareilThree" [appareilStatus]="'éteint'"></app-appareil> -->
+                    </ul>
+            <button class="btn btn-sucess" 
+            [disabled]="!isAuth"
+            (click)="onAllumer()"> Tout allumer</button>
+        </div>
+    </div>
+</div>
