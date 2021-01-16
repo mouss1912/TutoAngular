@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { resolve, reject } from 'q';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isAuth = false;
+  //lastUpdate = new Date();
+  lastUpdate = new Promise(
+    (resolve, reject) => {
+      const date = new Date();
+      setTimeout (
+        () => {
+        resolve(date);
+      },2000
+      );
+    }
+  )
   // cas1 (1)
   /*
   appareilOne = 'Machine à laver';
