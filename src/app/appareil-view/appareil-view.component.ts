@@ -7,8 +7,10 @@ import { AppareilService } from '../services/appareil.service';
   styleUrls: ['./appareil-view.component.scss']
 })
 export class AppareilViewComponent implements OnInit {
-  isAuth = false;
+  //Le property binding = liaison par propriété
+  isAuth = false; // propriété lié au html par le []
   appareils: any[];
+  
   lastUpdate = new Promise((resolve, reject) => {
     const date = new Date();
     setTimeout(
@@ -23,6 +25,7 @@ export class AppareilViewComponent implements OnInit {
     this.appareils = this.appareilService.appareils;
   }
 
+  //le Event Biding : pour réagir dans typeScript aux événements venant du template html
   onAllumer() {
     this.appareilService.switchOnAll();
   }

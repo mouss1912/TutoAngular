@@ -11,6 +11,7 @@ export class AppareilComponent implements OnInit {
 // appareilName = 'Machine à laver';
 // appareilStatus = 'eteint';
 /* Avec Input */
+// le @Input c'est pour capturer et travailler avec les variables en property binding
 @Input() appareilName: string;
 @Input() appareilStatus: string;
 @Input() indexOfAppareil: number;
