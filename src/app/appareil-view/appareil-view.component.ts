@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppareilService } from '../services/appareil.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appareil-view',
@@ -10,6 +11,8 @@ export class AppareilViewComponent implements OnInit {
   //Le property binding = liaison par propriété
   isAuth = false; // propriété lié au html par le []
   appareils: any[];
+  //Creer uner nouvelle subscirption
+  appareilSubscription : Subscription;
   
   lastUpdate = new Promise((resolve, reject) => {
     const date = new Date();
@@ -22,7 +25,21 @@ export class AppareilViewComponent implements OnInit {
   constructor(private appareilService: AppareilService) { }
 
   ngOnInit(): void {
-    this.appareils = this.appareilService.appareils;
+    //this.appareils = this.appareilService.appareils;
+    //Aprés subscribe
+    this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
+      //resultat
+      (appareils : any[]) => {
+        this.appareils = appareils;
+      },
+      (error) => {
+        console.log("erreur dans subscribe AppareilViewComponent" + error)
+      },
+      () => {
+        console.log("Observable complete !")
+      }
+    );
+    this.appareilService.emitAppareilSubject();
   }
 
   //le Event Biding : pour réagir dans typeScript aux événements venant du template html
@@ -36,6 +53,10 @@ export class AppareilViewComponent implements OnInit {
     } else {
       return null;
     }
+  }
+  // Arreter la subscription
+  ngOnDestroy(){
+    this.appareilSubscription.unsubscribe();
   }
 
 }
