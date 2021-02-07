@@ -12,8 +12,8 @@ export class AppareilViewComponent implements OnInit {
   isAuth = false; // propriété lié au html par le []
   appareils: any[];
   //Creer uner nouvelle subscirption
-  appareilSubscription : Subscription;
-  
+  appareilSubscription: Subscription;
+
   lastUpdate = new Promise((resolve, reject) => {
     const date = new Date();
     setTimeout(
@@ -29,7 +29,7 @@ export class AppareilViewComponent implements OnInit {
     //Aprés subscribe
     this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
       //resultat
-      (appareils : any[]) => {
+      (appareils: any[]) => {
         this.appareils = appareils;
       },
       (error) => {
@@ -48,15 +48,31 @@ export class AppareilViewComponent implements OnInit {
   }
 
   onEteindre() {
-    if(confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
+    if (confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
       this.appareilService.switchOffAll();
     } else {
       return null;
     }
   }
-  // Arreter la subscription
-  ngOnDestroy(){
+
+  /**
+   *   Arreter la subscription
+   */
+  ngOnDestroy() {
     this.appareilSubscription.unsubscribe();
   }
 
+  /**
+   *   Méthode pour enregistrer un appareil dans BD
+   */
+  onSave() {
+    this.appareilService.saveAppareilsToServer();
+  }
+  
+  /**
+   * Méthode pour recupérer la liste des appareils
+   */
+  onFetch() {
+    this.appareilService.getAppareilsFromServer();
+  }
 }

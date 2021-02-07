@@ -1,27 +1,23 @@
 <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h2> Mes appareils </h2>
-                <p> Mise à jour : {{ lastUpdate |async | date :'short' | uppercase }}</p>
-                    <ul class="list-group">
-                            <app-appareil *ngFor="let appareil of appareils ; let i = index"
-                            [appareilName]= "appareil.name"
-                            [appareilStatus]="appareil.status"
-                            [indexOfAppareil]= "i"
-                            [id]="appareil.id"
-                            ></app-appareil>
-                        <!--NB: "'éteint'" : pour que ça soit bien des string-->
-                        
-    <!--                     // cas1 (2) avec le ngFor cas1 (1) avec la liste
+    <div class="row">
+        <div class="col-xs-12">
+            <h2> Mes appareils </h2>
+            <p> Mise à jour : {{ lastUpdate |async | date :'short' | uppercase }}</p>
+            <ul class="list-group">
+                <app-appareil *ngFor="let appareil of appareils ; let i = index" [appareilName]="appareil.name"
+                    [appareilStatus]="appareil.status" [indexOfAppareil]="i" [id]="appareil.id"></app-appareil>
+                <!--NB: "'éteint'" : pour que ça soit bien des string-->
+
+                <!--                     // cas1 (2) avec le ngFor cas1 (1) avec la liste
                             <app-appareil [appareilName]="appareilOne" [appareilStatus]="'éteint'"></app-appareil>
                             <app-appareil [appareilName]="appareilTwo" [appareilStatus]="'allumé'"></app-appareil>
                             <app-appareil [appareilName]="appareilThree" [appareilStatus]="'éteint'"></app-appareil> -->
-                        </ul>
-    
-                <button class="btn btn-success" 
-                [disabled]="!isAuth"
-                (click)="onAllumer()"> Tout allumer</button>
-                <button class="btn btn-danger" (click)="onEteindre()">Tout eteindre</button>
-            </div>
+            </ul>
+
+            <button class="btn btn-success" [disabled]="!isAuth" (click)="onAllumer()"> Tout allumer</button>
+            <button class="btn btn-danger" (click)="onEteindre()">Tout eteindre</button>
+            <button class="btn btn-primary" (click)="onSave()">Enregistrer les appareils</button>
+            <button class="btn btn-primary" (click)="onFetch()">Récupérer les appareils</button>
         </div>
     </div>
+</div>
